@@ -1,0 +1,16 @@
+.images {
+  text-align: center;
+}
+
+.input {
+  text-align: center;
+}
+
+.input input {
+  height: 20px;
+  margin: 20px 0;
+}
+
+.input button {
+  margin: 20px 0;
+}
