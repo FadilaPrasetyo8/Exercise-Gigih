@@ -4,7 +4,7 @@ import "./databaru.css";
 
 export default function Baru() {
   const Databaru = data
-    .filter((data) => data.rating == "pg")
+    .filter((data) => data.rating === "pg")
     .map((filterData) => (
       <figure key={filterData.id}>
         <img src={filterData.url} />
