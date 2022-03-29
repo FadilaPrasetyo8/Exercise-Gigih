@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import data from "../../components/data/data";
+import Gift from "../../components/gift/gift";
+import "./indexCari.css";
 
 export class Cari extends Component {
   constructor() {
@@ -7,43 +10,51 @@ export class Cari extends Component {
       value: "",
       results: [],
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-    console.log(event.target.value);
+  handleSubmit(e) {
+    e.preventDefault();
+    const x = document.getElementById("input").value;
+    fetch(
+      `http://api.giphy.com/v1/gifs/search?q=${x}&api_key=${process.env.REACT_APP_GIPHYKEY}&limit=10`
+    )
+      .then((response) => response.json())
+      .then(({ data }) => {
+        this.setState({ results: data });
+        console.log(data);
+      });
   }
-  //   _ubahNama = () => this.setState({ nama: "Ani", umur: 18 });
-  //   _ubahNama2 = (namaBaru) => this.setState({ nama: namaBaru });
-  //   _ubahUmur = (umurBaru) => this.setState({ umur: parseInt(umurBaru) });
+
+  componentDidMount() {
+    fetch(
+      `http://api.giphy.com/v1/gifs/search?q=dog&api_key=${process.env.REACT_APP_GIPHYKEY}&limit=10`
+    )
+      .then((response) => response.json())
+      .then(({ data }) => {
+        this.setState({ results: data });
+      });
+  }
 
   render() {
     return (
-      //   <div>
-      //     <div>State props</div>
-      //     <div>{this.state.nama}</div>
-      //     <div>{this.state.umur}</div>
-
-      //     <input type="button" onClick={this._ubahNama} value="UBAH" />
-      //     <br />
-      //     <input
-      //       type="text"
-      //       onBlur={(event) => this._ubahNama2(event.target.value)}
-      //     />
-
-      //     <br />
-      //     <input
-      //       type="number"
-      //       onBlur={(event) => this._ubahUmur(event.target.value)}
-      //     />
-      //   </div>
-
-      <div>
-        <form>
-          <input type="text" onChange={this.handleChange} />
-          <button>Search</button>
-        </form>
+      <div className="container">
+        <div className="top-form">
+          <form className="form" onSubmit={this.handleSubmit}>
+            <input type="text" id="input" />
+            <button className="btn-submit">Search</button>
+          </form>
+        </div>
+        {this.state.results.map((gif) => {
+          return (
+            <div className="cards">
+              <figure key={gif.id}>
+                <img src={gif.images.original.url} />
+                <figcaption>{gif.title}</figcaption>
+              </figure>
+            </div>
+          );
+        })}
       </div>
     );
   }
