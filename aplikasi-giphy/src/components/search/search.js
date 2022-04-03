@@ -1,13 +1,17 @@
 import React from "react";
-import gif from "../data/data.js";
 
-export default function Search(props) {
+const Search = ({ onSubmit, onChange }) => {
   return (
-    <div>
-      <div className="input">
-        <input placeholder="Giphy" type="text" />
-        <button className="btn-search">Search</button>
-      </div>
-    </div>
+    <form className="form" onSubmit={onSubmit}>
+      <input
+        type="text"
+        id="input"
+        onChange={onChange}
+        placeholder="Search Gif.."
+      />
+      <button className="btn-submit">Search</button>
+    </form>
   );
-}
+};
+
+export default Search;

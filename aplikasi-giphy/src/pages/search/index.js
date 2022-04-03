@@ -22,13 +22,12 @@ export class Cari extends Component {
       .then((response) => response.json())
       .then(({ data }) => {
         this.setState({ results: data });
-        console.log(data);
       });
   }
 
   componentDidMount() {
     fetch(
-      `http://api.giphy.com/v1/gifs/search?q=dog&api_key=${process.env.REACT_APP_GIPHYKEY}&limit=10`
+      `http://api.giphy.com/v1/gifs/search?q=cat&api_key=${process.env.REACT_APP_GIPHYKEY}&limit=10`
     )
       .then((response) => response.json())
       .then(({ data }) => {
@@ -45,10 +44,11 @@ export class Cari extends Component {
             <button className="btn-submit">Search</button>
           </form>
         </div>
+
         {this.state.results.map((gif) => {
           return (
-            <div className="cards">
-              <figure key={gif.id}>
+            <div className="cards" key={gif.id}>
+              <figure>
                 <img src={gif.images.original.url} />
                 <figcaption>{gif.title}</figcaption>
               </figure>

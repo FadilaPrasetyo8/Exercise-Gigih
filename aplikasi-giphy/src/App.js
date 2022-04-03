@@ -1,16 +1,9 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Giphy from "./pages/home/index.js";
-import { Cari } from "./pages/search";
-import IndexF from "./pages/search/indexF";
+import React from "react";
 
-function App() {
-  return (
-    <div>
-      {/* <Cari /> */}
-      <IndexF />
-    </div>
-  );
-}
+import { Index } from "./pages/home";
+
+const App = () => {
+  return <Index />;
+};
 
 export default App;

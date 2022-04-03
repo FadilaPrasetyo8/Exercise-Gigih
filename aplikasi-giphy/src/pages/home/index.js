@@ -1,31 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { Auth } from "../../Auth/Auth";
+
+import GifCard from "../../components/gift/gift";
 import Search from "../../components/search/search";
+
 import "./index.css";
-import Baru from "../../components/databaru/databaru";
 
-export default function Giphy(props) {
-  // const [input, setInput] = useState();
-  // const [value, setValue] = useState();
+export const Index = () => {
+  const [search, setSearch] = useState("");
+  const [results, setResult] = useState([]);
 
-  // const handleCharge = (e) => {
-  //   setInput(e.target.value);
-  // };
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
-  // const handleClick = () => setValue(input);
+  const getResult = () => {
+    Auth(search).then((res) => setResult(res.data));
+  };
 
-  // const Databaru = data
-  //   .filter((data) => data.rating == "pg")
-  //   .map((filterData) => (
-  //     <figure key={filterData.id}>
-  //       <img src={filterData.url} />
-  //       <figcaption>{filterData.title}</figcaption>
-  //     </figure>
-  //   ));
+  const data = Object.values(results).map((gif) => (
+    <GifCard id={gif.id} images={gif.images.original.url} title={gif.title} />
+  ));
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    getResult();
+  };
 
   return (
-    <div>
-      <Search />
-      <Baru />
+    <div className="container">
+      <div className="top-form">
+        <Search onSubmit={handleSubmit} onChange={handleChange} />
+      </div>
+      {data}
     </div>
   );
-}
+};

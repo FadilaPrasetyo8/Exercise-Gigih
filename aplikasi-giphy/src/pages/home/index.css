@@ -1,1 +1,27 @@
+.top-form {
+  height: 100px;
+  background-color: rgba(114, 102, 102, 0.993);
+}
 
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.form input {
+  height: 30px;
+  width: 400px;
+}
+
+.btn-submit {
+  background-color: rgb(139, 179, 253);
+  margin-left: 20px;
+  height: 35px;
+  width: 70px;
+}
+
+.btn-submit:hover {
+  opacity: 1;
+}
