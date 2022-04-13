@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
+import SearchContext from "./contex/searchContex";
 
-import { Index } from "./pages/home";
+import Nav from "./components/navigasi/router";
 
 const App = () => {
-  return <Index />;
+  const [keyword, setKeyword] = useState("naruto");
+  const value = useMemo(() => ({ keyword, setKeyword }), [keyword]);
+  return (
+    <SearchContext.Provider value={"value"}>
+      <Nav />
+    </SearchContext.Provider>
+  );
 };
 
 export default App;
